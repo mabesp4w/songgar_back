@@ -13,22 +13,27 @@ class EmployeeAPI extends Controller
     {
         $search = $request->search;
         $limit = $request->limit;
-        $role = $request->role;
-        $data = Employee::with(['user', 'major'])->whereHas('user', function ($q) use ($search) {
-            $q->where('email', 'like', "%$search%")
-                ->orWhere('name', 'like', "%$search%");
-        })
-            ->when($role, function ($query) use ($role) {
-                $query->where('role', $role);
+        $jabatan = $request->jabatan;
+        $data = Employee::with(['major'])
+            ->where('nm_employee', 'like', "%$search%")
+            ->when($jabatan, function ($query) use ($jabatan) {
+                $query->where('jabatan', $jabatan);
             })
             ->pluck('nm_employee')
             ->paginate($limit);
         return new CrudResource('success', 'Data Kelas', $data);
     }
 
-    function all()
+    function all(Request $request)
     {
-        $data = Employee::with(['user', 'major'])->all();
+        $search = $request->search;
+        $jabatan = $request->jabatan;
+        $data = Employee::with(['major'])
+            ->where('nm_employee', 'like', "%$search%")
+            ->when($jabatan, function ($query) use ($jabatan) {
+                $query->where('jabatan', $jabatan);
+            })
+            ->get();
         return new CrudResource('success', 'Data Employee', $data);
     }
 }

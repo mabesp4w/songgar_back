@@ -11,6 +11,7 @@ Route::middleware(['auth:api', 'role:admin', 'mythrottle'])->group(function () {
         'news' => App\Http\Controllers\CRUD\NewsController::class,
         'academicCalendars' => App\Http\Controllers\CRUD\AcademicCalendarController::class,
         'facilities' => App\Http\Controllers\CRUD\FacilityController::class,
+        'structurals' => App\Http\Controllers\CRUD\StructuralController::class,
     ]);
     Route::group(['prefix' => 'galleries'], function () {
         Route::resources([

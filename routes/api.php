@@ -34,4 +34,10 @@ Route::middleware(['mythrottle'])->group(function () {
         Route::get('/', [App\Http\Controllers\API\NewsAPI::class, 'index']);
         Route::get('/all', [App\Http\Controllers\API\NewsAPI::class, 'all']);
     });
+
+    // api structural
+    Route::prefix('structures')->group(function () {
+        Route::get('/', [App\Http\Controllers\API\StructuralAPI::class, 'index']);
+        Route::get('/all', [App\Http\Controllers\API\StructuralAPI::class, 'all']);
+    });
 });

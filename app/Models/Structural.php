@@ -9,4 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Structural extends Model
 {
     use HasFactory, HasUuids;
+
+    // belongsTo employee
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }
