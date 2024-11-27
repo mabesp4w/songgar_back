@@ -52,4 +52,10 @@ Route::middleware(['mythrottle'])->group(function () {
         Route::get('/', [App\Http\Controllers\API\GalleryVideoAPI::class, 'index']);
         Route::get('/all', [App\Http\Controllers\API\GalleryVideoAPI::class, 'all']);
     });
+
+    // api academicCalendars
+    Route::prefix('academicCalendars')->group(function () {
+        Route::get('/', [App\Http\Controllers\API\AcademicCalendarAPI::class, 'index']);
+        Route::get('/all', [App\Http\Controllers\API\AcademicCalendarAPI::class, 'all']);
+    });
 });
