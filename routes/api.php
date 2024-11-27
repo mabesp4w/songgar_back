@@ -40,4 +40,16 @@ Route::middleware(['mythrottle'])->group(function () {
         Route::get('/', [App\Http\Controllers\API\StructuralAPI::class, 'index']);
         Route::get('/all', [App\Http\Controllers\API\StructuralAPI::class, 'all']);
     });
+
+    // api photos
+    Route::prefix('photos')->group(function () {
+        Route::get('/', [App\Http\Controllers\API\GalleryPhotoAPI::class, 'index']);
+        Route::get('/all', [App\Http\Controllers\API\GalleryPhotoAPI::class, 'all']);
+    });
+
+    // api videos
+    Route::prefix('videos')->group(function () {
+        Route::get('/', [App\Http\Controllers\API\GalleryVideoAPI::class, 'index']);
+        Route::get('/all', [App\Http\Controllers\API\GalleryVideoAPI::class, 'all']);
+    });
 });

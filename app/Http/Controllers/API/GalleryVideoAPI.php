@@ -5,21 +5,19 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CrudResource;
-use App\Models\Employee;
+use App\Models\GalleryVideo;
 
-class EmployeeAPI extends Controller
+class GalleryVideoAPI extends Controller
 {
     function index(Request $request)
     {
         $search = $request->search;
         $limit = $request->limit;
         $jabatan = $request->jabatan;
-        $data = Employee::with(['major'])
-            ->where('nm_employee', 'like', "%$search%")
+        $data = GalleryVideo::where('title_video', 'like', "%$search%")
             ->when($jabatan, function ($query) use ($jabatan) {
                 $query->where('jabatan', $jabatan);
             })
-            ->pluck('nm_employee')
             ->paginate($limit);
         return new CrudResource('success', 'Data Kelas', $data);
     }
@@ -28,13 +26,12 @@ class EmployeeAPI extends Controller
     {
         $search = $request->search;
         $jabatan = $request->jabatan;
-        $data = Employee::with(['major', 'structural'])
-            ->where('nm_employee', 'like', "%$search%")
+        $data = GalleryVideo::where('title_video', 'like', "%$search%")
             ->when($jabatan, function ($query) use ($jabatan) {
                 $query->where('jabatan', $jabatan);
             })
-            ->orderBy('nm_employee', 'asc')
+            ->orderBy('created_at', 'desc')
             ->get();
-        return new CrudResource('success', 'Data Employee', $data);
+        return new CrudResource('success', 'Data GalleryVideo', $data);
     }
 }

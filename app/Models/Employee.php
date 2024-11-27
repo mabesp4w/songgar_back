@@ -21,4 +21,10 @@ class Employee extends Model
     {
         return $this->belongsTo(Major::class);
     }
+
+    // hasMany Structural
+    public function structural()
+    {
+        return $this->hasMany(Structural::class);
+    }
 }

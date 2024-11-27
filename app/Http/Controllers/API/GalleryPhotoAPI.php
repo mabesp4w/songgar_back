@@ -5,21 +5,20 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CrudResource;
-use App\Models\Employee;
+use App\Models\GalleryPhoto;
 
-class EmployeeAPI extends Controller
+class GalleryPhotoAPI extends Controller
 {
     function index(Request $request)
     {
         $search = $request->search;
         $limit = $request->limit;
         $jabatan = $request->jabatan;
-        $data = Employee::with(['major'])
-            ->where('nm_employee', 'like', "%$search%")
+        $data = GalleryPhoto::where('title_photo', 'like', "%$search%")
             ->when($jabatan, function ($query) use ($jabatan) {
                 $query->where('jabatan', $jabatan);
             })
-            ->pluck('nm_employee')
+            ->pluck('title_photo')
             ->paginate($limit);
         return new CrudResource('success', 'Data Kelas', $data);
     }
@@ -28,13 +27,12 @@ class EmployeeAPI extends Controller
     {
         $search = $request->search;
         $jabatan = $request->jabatan;
-        $data = Employee::with(['major', 'structural'])
-            ->where('nm_employee', 'like', "%$search%")
+        $data = GalleryPhoto::where('title_photo', 'like', "%$search%")
             ->when($jabatan, function ($query) use ($jabatan) {
                 $query->where('jabatan', $jabatan);
             })
-            ->orderBy('nm_employee', 'asc')
+            ->orderBy('created_at', 'desc')
             ->get();
-        return new CrudResource('success', 'Data Employee', $data);
+        return new CrudResource('success', 'Data GalleryPhoto', $data);
     }
 }
