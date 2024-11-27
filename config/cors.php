@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3099', 'http://localhost:3000', 'https://example2.com'],
+    'allowed_origins' => ['http://localhost:3099', 'http://localhost:3000', 'https://fpkk-uogp.vercel.app'],
 
     'allowed_origins_patterns' => [],
 
