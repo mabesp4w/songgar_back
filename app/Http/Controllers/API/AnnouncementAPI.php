@@ -20,7 +20,7 @@ class AnnouncementAPI extends Controller
             ->orderBy('announcement_date', 'desc')
             ->orderBy($sortby ?? 'created_at', $order ?? 'desc')
             ->paginate($limit);
-        return new CrudResource('success', 'Data Kelas', $data);
+        return new CrudResource('success', 'Data Pengumuman', $data);
     }
 
     function all(Request $request)
@@ -33,6 +33,12 @@ class AnnouncementAPI extends Controller
             ->orderBy('announcement_date', 'desc')
             ->orderBy($sortby ?? 'created_at', $order ?? 'desc')
             ->get();
-        return new CrudResource('success', 'Data Kelas', $data);
+        return new CrudResource('success', 'Data Pengumuman', $data);
+    }
+
+    function show($id)
+    {
+        $data = Announcement::with('major')->find($id);
+        return new CrudResource('success', 'Data Pengumuman', $data);
     }
 }

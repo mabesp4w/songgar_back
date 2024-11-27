@@ -22,7 +22,7 @@ class NewsAPI extends Controller
             ->orderBy('news_date', 'desc')
             ->orderBy($sortby ?? 'created_at', $order ?? 'desc')
             ->paginate($limit);
-        return new CrudResource('success', 'Data Kelas', $data);
+        return new CrudResource('success', 'Data Berita', $data);
     }
 
     function all(Request $request)
@@ -37,6 +37,12 @@ class NewsAPI extends Controller
             ->orderBy('news_date', 'desc')
             ->orderBy($sortby ?? 'created_at', $order ?? 'desc')
             ->get();
-        return new CrudResource('success', 'Data Kelas', $data);
+        return new CrudResource('success', 'Data Berita', $data);
+    }
+
+    function show($id)
+    {
+        $data = News::find($id);
+        return new CrudResource('success', 'Data Berita', $data);
     }
 }
